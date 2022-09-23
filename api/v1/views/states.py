@@ -24,7 +24,7 @@ def get_states():
 @swag_from('documentation/state/get_id_state.yml', methods=['get'])
 def get_state(state_id):
     """ Retrieves a specific State """
-    state = storage.get(State, state_id)
+    state = get(State, state_id)
     if not state:
         abort(404)
 
@@ -39,7 +39,7 @@ def delete_state(state_id):
     Deletes a State Object
     """
 
-    state = storage.get(State, state_id)
+    state = get(State, state_id)
 
     if not state:
         abort(404)
@@ -74,7 +74,7 @@ def put_state(state_id):
     """
     Updates a State
     """
-    state = storage.get(State, state_id)
+    state = get(State, state_id)
 
     if not state:
         abort(404)

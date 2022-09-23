@@ -17,7 +17,7 @@ def get_cities(state_id):
     of a specific State, or a specific city
     """
     list_cities = []
-    state = storage.get(State, state_id)
+    state = get(State, state_id)
     if not state:
         abort(404)
     for city in state.cities:
@@ -32,7 +32,7 @@ def get_city(city_id):
     """
     Retrieves a specific city based on id
     """
-    city = storage.get(City, city_id)
+    city = get(City, city_id)
     if not city:
         abort(404)
     return jsonify(city.to_dict())
@@ -44,7 +44,7 @@ def delete_city(city_id):
     """
     Deletes a city based on id provided
     """
-    city = storage.get(City, city_id)
+    city = get(City, city_id)
 
     if not city:
         abort(404)
@@ -61,7 +61,7 @@ def post_city(state_id):
     """
     Creates a City
     """
-    state = storage.get(State, state_id)
+    state = get(State, state_id)
     if not state:
         abort(404)
     if not request.get_json():
@@ -82,7 +82,7 @@ def put_city(city_id):
     """
     Updates a City
     """
-    city = storage.get(City, city_id)
+    city = get(City, city_id)
     if not city:
         abort(404)
 

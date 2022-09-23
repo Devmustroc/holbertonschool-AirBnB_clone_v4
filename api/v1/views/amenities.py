@@ -25,7 +25,7 @@ def get_amenities():
 @swag_from('documentation/amenity/get_amenity.yml', methods=['GET'])
 def get_amenity(amenity_id):
     """ Retrieves an amenity """
-    amenity = storage.get(Amenity, amenity_id)
+    amenity = get(Amenity, amenity_id)
     if not amenity:
         abort(404)
 
@@ -40,7 +40,7 @@ def delete_amenity(amenity_id):
     Deletes an amenity  Object
     """
 
-    amenity = storage.get(Amenity, amenity_id)
+    amenity = get(Amenity, amenity_id)
 
     if not amenity:
         abort(404)
@@ -81,7 +81,7 @@ def put_amenity(amenity_id):
 
     ignore = ['id', 'created_at', 'updated_at']
 
-    amenity = storage.get(Amenity, amenity_id)
+    amenity = get(Amenity, amenity_id)
 
     if not amenity:
         abort(404)

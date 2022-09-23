@@ -18,7 +18,7 @@ def get_places(city_id):
     """
     Retrieves the list of all Place objects of a City
     """
-    city = storage.get(City, city_id)
+    city = get(City, city_id)
 
     if not city:
         abort(404)
@@ -34,7 +34,7 @@ def get_place(place_id):
     """
     Retrieves a Place object
     """
-    place = storage.get(Place, place_id)
+    place = get(Place, place_id)
     if not place:
         abort(404)
 
@@ -49,7 +49,7 @@ def delete_place(place_id):
     Deletes a Place Object
     """
 
-    place = storage.get(Place, place_id)
+    place = get(Place, place_id)
 
     if not place:
         abort(404)
@@ -67,7 +67,7 @@ def post_place(city_id):
     """
     Creates a Place
     """
-    city = storage.get(City, city_id)
+    city = get(City, city_id)
 
     if not city:
         abort(404)
@@ -79,7 +79,7 @@ def post_place(city_id):
         abort(400, description="Missing user_id")
 
     data = request.get_json()
-    user = storage.get(User, data['user_id'])
+    user = get(User, data['user_id'])
 
     if not user:
         abort(404)
@@ -99,7 +99,7 @@ def put_place(place_id):
     """
     Updates a Place
     """
-    place = storage.get(Place, place_id)
+    place = get(Place, place_id)
 
     if not place:
         abort(404)
@@ -147,7 +147,7 @@ def places_search():
 
     list_places = []
     if states:
-        states_obj = [storage.get(State, s_id) for s_id in states]
+        states_obj = [get(State, s_id) for s_id in states]
         for state in states_obj:
             if state:
                 for city in state.cities:
@@ -156,7 +156,7 @@ def places_search():
                             list_places.append(place)
 
     if cities:
-        city_obj = [storage.get(City, c_id) for c_id in cities]
+        city_obj = [get(City, c_id) for c_id in cities]
         for city in city_obj:
             if city:
                 for place in city.places:
@@ -166,7 +166,7 @@ def places_search():
     if amenities:
         if not list_places:
             list_places = storage.all(Place).values()
-        amenities_obj = [storage.get(Amenity, a_id) for a_id in amenities]
+        amenities_obj = [get(Amenity, a_id) for a_id in amenities]
         list_places = [place for place in list_places
                        if all([am in place.amenities
                                for am in amenities_obj])]

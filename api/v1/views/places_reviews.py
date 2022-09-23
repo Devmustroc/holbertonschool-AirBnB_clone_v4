@@ -16,7 +16,7 @@ def get_reviews(place_id):
     """
     Retrieves the list of all Review objects of a Place
     """
-    place = storage.get(Place, place_id)
+    place = get(Place, place_id)
 
     if not place:
         abort(404)
@@ -32,7 +32,7 @@ def get_review(review_id):
     """
     Retrieves a Review object
     """
-    review = storage.get(Review, review_id)
+    review = get(Review, review_id)
     if not review:
         abort(404)
 
@@ -47,7 +47,7 @@ def delete_review(review_id):
     Deletes a Review Object
     """
 
-    review = storage.get(Review, review_id)
+    review = get(Review, review_id)
 
     if not review:
         abort(404)
@@ -65,7 +65,7 @@ def post_review(place_id):
     """
     Creates a Review
     """
-    place = storage.get(Place, place_id)
+    place = get(Place, place_id)
 
     if not place:
         abort(404)
@@ -77,7 +77,7 @@ def post_review(place_id):
         abort(400, description="Missing user_id")
 
     data = request.get_json()
-    user = storage.get(User, data['user_id'])
+    user = get(User, data['user_id'])
 
     if not user:
         abort(404)
@@ -97,7 +97,7 @@ def put_review(review_id):
     """
     Updates a Review
     """
-    review = storage.get(Review, review_id)
+    review = get(Review, review_id)
 
     if not review:
         abort(404)

@@ -58,7 +58,7 @@ def __analyse_html(file_path):
     u = "https://validator.w3.org/nu/?out=json"
     r = requests.post(u, headers=h, data=d)
     res = []
-    messages = r.json().get('messages', [])
+    messages = r.get('messages', [])
     for m in messages:
         res.append("[{}:{}] {}".format(file_path, m['lastLine'], m['message']))
     return res
@@ -72,7 +72,7 @@ def __analyse_css(file_path):
     u = "http://jigsaw.w3.org/css-validator/validator"
     r = requests.post(u, data=d, files=f)
     res = []
-    errors = r.json().get('cssvalidation', {}).get('errors', [])
+    errors = r.get('errors', [])
     for e in errors:
         res.append("[{}:{}] {}".format(file_path, e['line'], e['message']))
     return res

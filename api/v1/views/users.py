@@ -25,7 +25,7 @@ def get_users():
 @swag_from('documentation/user/get_user.yml', methods=['GET'])
 def get_user(user_id):
     """ Retrieves an user """
-    user = storage.get(User, user_id)
+    user = get(User, user_id)
     if not user:
         abort(404)
 
@@ -40,7 +40,7 @@ def delete_user(user_id):
     Deletes a user Object
     """
 
-    user = storage.get(User, user_id)
+    user = get(User, user_id)
 
     if not user:
         abort(404)
@@ -77,7 +77,7 @@ def put_user(user_id):
     """
     Updates a user
     """
-    user = storage.get(User, user_id)
+    user = get(User, user_id)
 
     if not user:
         abort(404)
